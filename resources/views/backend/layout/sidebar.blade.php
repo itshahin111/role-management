@@ -26,11 +26,11 @@
             </a>
             <ul>
                 <li>
-                    <a href="product-index.html"><i class='bx bx-radio-circle'></i>All Product</a>
+                    {{-- <a href="{{ route('products.index') }}"><i class='bx bx-radio-circle'></i>All Product</a> --}}
                 </li>
 
                 <li>
-                    <a href="product-create.html"><i class='bx bx-radio-circle'></i>Create Product</a>
+                    {{-- <a href="{{ route('products.create') }}"><i class='bx bx-radio-circle'></i>Create Product</a> --}}
                 </li>
 
             </ul>
@@ -45,11 +45,11 @@
             </a>
             <ul>
                 <li>
-                    <a href="roles-index.html"><i class='bx bx-radio-circle'></i>All Roles</a>
+                    <a href="{{ route('roles.index') }}"><i class='bx bx-radio-circle'></i>All Roles</a>
                 </li>
 
                 <li>
-                    <a href="roles-create.html"><i class='bx bx-radio-circle'></i>Create Role</a>
+                    <a href="{{ route('roles.create') }}"><i class='bx bx-radio-circle'></i>Create Role</a>
                 </li>
             </ul>
         </li>
@@ -63,11 +63,11 @@
             <ul>
 
                 <li>
-                    <a href="user-index.html"><i class='bx bx-radio-circle'></i>All Users</a>
+                    {{-- <a href="{{ route('users.index') }}"><i class='bx bx-radio-circle'></i>All Users</a> --}}
                 </li>
 
                 <li>
-                    <a href="user-create.html"><i class='bx bx-radio-circle'></i>Create User</a>
+                    {{-- <a href="{{ route('users.create') }}"><i class='bx bx-radio-circle'></i>Create User</a> --}}
                 </li>
 
             </ul>
