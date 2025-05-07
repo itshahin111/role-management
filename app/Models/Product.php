@@ -10,6 +10,8 @@ class Product extends Model
         'name',
         'description',
         'price',
-        'quantity'
+        'quantity',
+        'image',
     ];
+
 }

@@ -26,5 +26,8 @@ class DatabaseSeeder extends Seeder
             PermissionTableSeeder::class,
             UserSeeder::class,
         ]);
+        $this->call([
+            ProductsTableSeeder::class,
+        ]);
     }
 }

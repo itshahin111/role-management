@@ -1,7 +1,7 @@
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
         <div>
-            <img src="assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+            <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
         </div>
         <div>
             <h4 class="logo-text">Rocker</h4>
@@ -12,7 +12,7 @@
     <!--navigation-->
     <ul class="metismenu" id="menu">
         <li>
-            <a href="index.html" class="">
+            <a href="{{ route('dashboard') }}" class="">
                 <div class="parent-icon"><i class='bx bx-home-alt'></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
@@ -26,11 +26,11 @@
             </a>
             <ul>
                 <li>
-                    {{-- <a href="{{ route('products.index') }}"><i class='bx bx-radio-circle'></i>All Product</a> --}}
+                    <a href="{{ route('products.index') }}"><i class='bx bx-radio-circle'></i>All Product</a>
                 </li>
 
                 <li>
-                    {{-- <a href="{{ route('products.create') }}"><i class='bx bx-radio-circle'></i>Create Product</a> --}}
+                    <a href="{{ route('products.create') }}"><i class='bx bx-radio-circle'></i>Create Product</a>
                 </li>
 
             </ul>
