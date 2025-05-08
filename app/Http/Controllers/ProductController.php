@@ -79,24 +79,67 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit(string $id)
     {
-        //
+        // Find the product by ID
+        $product = Product::findOrFail($id);
+        // return $product;
+        return view('backend.pages.products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, string $id)
     {
-        //
+        // dd($request->all());
+        // Find the product by ID
+        $product = Product::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric|min:0',
+            'quantity' => 'required|integer|min:0',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle new image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if exists
+            if ($product->image && Storage::disk('public')->exists($product->image)) {
+                Storage::disk('public')->delete($product->image);
+            }
+
+            // Store new image with original filename
+            $file = $request->file('image');
+            $originalFileName = $file->getClientOriginalName();
+            $validatedData['image'] = $file->storeAs('products', $originalFileName, 'public');
+        }
+
+        // Update product with validated data
+        $product->update($validatedData);
+
+        return redirect()->route('products.index')->with('success', 'Product updated successfully.');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function destroy(string $id)
     {
-
+        $product = Product::findOrFail($id);
+        // Delete the image from storage
+        // Check if the product has an image and delete it
+        if ($product->image) {
+            Storage::disk('public')->delete($product->image);
+        }
+        // Delete the product from the database
+        $product->delete();
+        // Delete the image from storage
+        // Flash message
+        session()->flash('success', 'Product deleted successfully.');
+        return redirect()->route('products.index');
     }
 }

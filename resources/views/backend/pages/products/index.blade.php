@@ -63,16 +63,16 @@
                                                     </td>
                                                     <td>{{ $product->quantity }}</td>
                                                     <td>
-                                                        <a href="">Edit</a>
-                                                        {{-- <form action="{{ route('products.destroy', $product) }}"
+                                                        <a href="{{ route('products.edit', $product->id) }}">Edit</a>
+                                                        <form action="{{ route('products.destroy', $product->id) }}"
                                                             method="POST"
                                                             onsubmit="return confirm('Are you sure you want to delete this product?')">
                                                             @csrf
-                                                            @method('DELETE') --}}
+                                                            @method('DELETE')
                                                             <button type="submit" class="btn btn-danger btn-sm">
                                                                 Delete
                                                             </button>
-                                                        {{-- </form> --}}
+                                                        </form>
                                                     </td>
                                             </tr>
                                             @endforeach
