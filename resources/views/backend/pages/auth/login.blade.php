@@ -10,7 +10,7 @@
     <!--wrapper-->
     <div class="wrapper">
         <div class="section-authentication-cover">
-            <div class="">
+            <div class="">gi
                 <div class="row g-0">
 
                     <div
@@ -73,7 +73,7 @@
                                             <div class="col-12">
                                                 <div class="text-center ">
                                                     <p class="mb-0">Don't have an account yet? <a
-                                                            href="authentication-signup.html">Sign up here</a>
+                                                            href="{{ route('register') }}">Sign up here</a>
                                                     </p>
                                                 </div>
                                             </div>

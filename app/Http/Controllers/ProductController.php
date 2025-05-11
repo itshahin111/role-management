@@ -36,6 +36,14 @@ class ProductController extends Controller
         //     'all'   => $request->all(),
         //     'file'  => $request->file('image'),
         // ]);
+        // dd(auth()->user());
+        // $user = auth()->user();
+// dd($user->getAllPermissions()); // Debug list of all permissions
+
+// dd($user->can('product-create')); // Should return true
+// Make Sure Auth is working
+// dd(auth()->user(), auth()->check());
+
 
         // Validate input
         $validatedData = $request->validate([
@@ -43,7 +51,7 @@ class ProductController extends Controller
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric|min:0',
             'quantity' => 'required|integer|min:0',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         // Handle file upload with custom filename
@@ -59,6 +67,7 @@ class ProductController extends Controller
             $originalFileName = $file->getClientOriginalName();
             $validatedData['image'] = $file->storeAs('products', $originalFileName, 'public');
         }
+        $validatedData['user_id'] = auth()->id();
         // Create product
         Product::create($validatedData);
         // Flash message

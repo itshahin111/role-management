@@ -13,12 +13,15 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            // one to one relationship with users
+            // $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key column
             $table->string('name');
             $table->text('description');
-            $table->decimal('price',8,2);
+            $table->decimal('price', 8, 2);
             $table->string('image')->nullable();
             $table->integer('quantity');
             $table->timestamps();
+            // Define the foreign key constraint
         });
     }
 

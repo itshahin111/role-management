@@ -12,60 +12,62 @@
                 </ol>
             </nav>
         </div>
-        {{-- @can('role-create') --}}
-        <div class="ms-auto">
-            <div class="btn-group">
-                <a href="{{ route('roles.create') }}" class="btn btn-primary">Create Role</a>
+        @can('role-create')
+            <div class="ms-auto">
+                <div class="btn-group">
+                    <a href="{{ route('roles.create') }}" class="btn btn-primary">Create Role</a>
+                </div>
             </div>
-        </div>
-        {{-- @endcan  --}}
+        @endcan
     </div>
     <!--end breadcrumb-->
     <h6 class="mb-0 text-uppercase">Role and Permissions</h6>
     <hr>
-    {{-- @can('role-list') --}}
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
-                    <table id="myTable" class="display table table-striped">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Name</th>
-                                <th>Permissions</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($roles as $key => $role)
+    @can('role-list')
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
+                        <table id="myTable" class="display table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $role->name }}</td>
-                                    <td>
-                                        @foreach ($role->permissions as $permission)
-                                            <span class="badge bg-danger">{{ $permission->name }}</span>
-                                        @endforeach
-
-                                    </td>
-                                    <td class="d-flex gap-2">
-
-                                        <a href="{{ route('roles.edit', $role->id) }}"
-                                            class="btn btn-primary btn-small">edit</a>
-                                            <form action="{{ route('roles.destroy',$role->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-small">delete</button>
-                                            </form>
-
-                                    </td>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Permissions</th>
+                                    <th>Action</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($roles as $key => $role)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $role->name }}</td>
+                                        <td>
+                                            @foreach ($role->permissions as $permission)
+                                                <span class="badge bg-danger">{{ $permission->name }}</span>
+                                            @endforeach
+
+                                        </td>
+                                        <td class="d-flex gap-2">
+                                            @can('role-edit')
+                                                <a href="{{ route('roles.edit', $role->id) }}"
+                                                    class="btn btn-primary btn-small">edit</a>
+                                            @endcan
+                                            @can('role-delete')
+                                                <form action="{{ route('roles.destroy', $role->id) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-small">delete</button>
+                                                </form>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    {{-- @endcan --}}
+    @endcan
 @endsection
